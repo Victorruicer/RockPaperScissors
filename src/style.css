@@ -168,21 +168,28 @@ canvas {
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
+  body {
+    overflow-y: auto;
+    /* Enable vertical scroll on mobile */
+  }
+
   #app {
     flex-direction: column-reverse;
+    height: auto;
+    /* Allow app to grow for scrolling */
+    min-height: 100vh;
   }
 
   .sidebar {
     width: 100%;
     height: auto;
-    max-height: 40vh;
+    /* Removed max-height constraint to allow content to flow */
     border-right: none;
     border-top: 4px solid var(--border-color);
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
+    /* Stack controls and stats vertically */
     padding: 1rem;
-    gap: 1rem;
-    justify-content: center;
+    gap: 1.5rem;
     align-items: center;
   }
 
@@ -190,36 +197,69 @@ canvas {
     display: none;
   }
 
+  /* Reorder Stats to appear above Controls on mobile */
+  .stats {
+    order: -1;
+    /* Move to top of sidebar */
+    display: flex;
+    /* Show stats on mobile */
+    width: 100%;
+    /* Full width */
+    max-width: 95%;
+    /* Little padding */
+    flex-direction: row;
+    /* Horizontal stats container */
+    justify-content: space-around;
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .stats h2 {
+    display: none;
+    /* Hide title */
+  }
+
+  .stat-item {
+    font-size: 0.8rem;
+    flex-direction: row;
+    /* Horizontal items (Emoji Number) */
+    gap: 0.5rem;
+    align-items: center;
+  }
+
   .controls {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    align-items: center;
+    gap: 1.5rem;
+    align-items: flex-start;
     justify-content: center;
     width: 100%;
   }
 
   .control-group {
-    gap: 0.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center input below text */
+    gap: 0.5rem;
+    text-align: center;
   }
 
   input {
-    width: 60px;
-    padding: 0.4rem;
-  }
-
-  .stats {
-    display: none;
+    width: 70px;
+    padding: 0.5rem;
+    text-align: center;
   }
 
   button {
-    margin-top: 0;
-    padding: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 1rem 2rem;
+    width: 80%;
   }
 
   .winner-display {
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 20;
@@ -227,6 +267,8 @@ canvas {
   }
 
   .canvas-container {
-    height: 60vh;
+    height: 45vh;
+    /* Reduced height as requested */
+    width: 100%;
   }
 }
