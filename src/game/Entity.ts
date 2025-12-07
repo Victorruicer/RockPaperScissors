@@ -4,14 +4,15 @@ export class Entity {
     position: Vector2;
     velocity: Vector2;
     type: EntityType;
-    radius: number = 19;
-    mass: number = 1;
+    get radius(): number {
+        return window.innerWidth <= 768 ? 14 : 19;
+    }
 
     constructor(x: number, y: number, type: EntityType) {
         this.position = { x, y };
         this.type = type;
 
-        // Increased speed
+        // Speed
         const speed = 60;
         const angle = Math.random() * Math.PI * 2;
         this.velocity = {
@@ -43,7 +44,8 @@ export class Entity {
     }
 
     draw(ctx: CanvasRenderingContext2D) {
-        ctx.font = '40px "Press Start 2P", sans-serif';
+        const fontSize = window.innerWidth <= 768 ? '25px' : '40px';
+        ctx.font = `${fontSize} "Press Start 2P", sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 

@@ -31,10 +31,13 @@ export class Simulation {
 
     resize() {
         if (this.canvas.parentElement) {
-            this.canvas.width = this.canvas.parentElement.clientWidth * 0.7;
-            this.canvas.height = this.canvas.parentElement.clientHeight * 0.7;
+            const isMobile = window.innerWidth <= 768;
+            const ratio = isMobile ? 0.95 : 0.7; // Use 95% on mobile, 70% on desktop
+
+            this.canvas.width = this.canvas.parentElement.clientWidth * ratio;
+            this.canvas.height = this.canvas.parentElement.clientHeight * ratio;
         } else {
-            this.canvas.width = 800;
+            this.canvas.width = 800; // Fallback
             this.canvas.height = 600;
         }
     }
